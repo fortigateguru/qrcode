@@ -10,24 +10,24 @@ st.title("AI-Enhanced QR Code Generator")
 st.sidebar.header("QR Code Customization")
 
 # Input text for QR code content
-qr_content = st.sidebar.text_input("Enter the content for the QR Code", "https://example.com")
+qr_content = st.sidebar.text_input("Enter the content for the QR Code", "https://example.com", key="qr_content")
 
 # Upload logo
-logo_file = st.sidebar.file_uploader("Upload your logo (optional)", type=["png", "jpg", "jpeg"])
+logo_file = st.sidebar.file_uploader("Upload your logo (optional)", type=["png", "jpg", "jpeg"], key="logo_file")
 
 # Input for color
-qr_color = st.sidebar.color_picker("Pick a QR code color", "#000000")
+qr_color = st.sidebar.color_picker("Pick a QR code color", "#000000", key="qr_color")
 
 # Input for background color
-background_color = st.sidebar.color_picker("Pick a background color", "#ffffff")
+background_color = st.sidebar.color_picker("Pick a background color", "#ffffff", key="background_color")
 
 # Button to generate QR code
-if st.sidebar.button("Generate QR Code"):
+if st.sidebar.button("Generate QR Code", key="generate_button"):
     # Generate QR code
     qr = qrcode.QRCode(
-        version=1,
-        error_correction=qrcode.constants.ERROR_CORRECT_H,
-        box_size=10,
+        version=1, 
+        error_correction=qrcode.constants.ERROR_CORRECT_H, 
+        box_size=10, 
         border=4
     )
     qr.add_data(qr_content)
@@ -61,5 +61,6 @@ if st.sidebar.button("Generate QR Code"):
         label="Download QR Code",
         data=byte_im,
         file_name="qr_code.png",
-        mime="image/png"
+        mime="image/png",
+        key="download_button"
     )
